@@ -1,9 +1,5 @@
 package com.infy.TO;
-/**
- * 
- * @author anoop_jadon
- *
- */
+
 public class LoginTo {
 
 	private String userName;
