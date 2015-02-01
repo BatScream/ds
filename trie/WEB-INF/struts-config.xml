@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC
+
+          "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN"
+
+          "dtd/struts-config_1_1.dtd">
+<struts-config>
+
+
+	<form-beans>
+
+		<form-bean name="LoginForm" type="com.infy.forms.LoginForm" />
+
+		<form-bean name="addPatchForm" type="com.infy.forms.AddPatchForm" />
+		
+		<form-bean name="searchForm" type="com.infy.forms.SearchForm"></form-bean>
+
+		
+	</form-beans>
+
+	<action-mappings>
+
+		<action input="/login.jsp" name="LoginForm" path="/login"
+
+			scope="session" parameter="method" type="com.infy.action.LoginAction" validate="true">
+
+			<forward name="success" path="/addPatch.do?method=loadPage" redirect="true"/>
+			<forward name="failure" path="/failure.jsp" />
+		</action>
+
+
+
+		<action input="/addPatch.jsp" name="addPatchForm" path="/addPatch"
+
+			scope="session" parameter="method" type="com.infy.action.AddPatchAction" validate="true">
+
+			<forward name="load" path="/addPatch.jsp" redirect="true" />
+			<forward name="success" path="/addPatch.jsp"  redirect="true" />
+			<forward name="failure" path="/addPatch.jsp" redirect="true"/>
+			<forward name="exception" path="/failure.jsp" redirect="true"/>
+
+		</action>
+
+		<action input="/search.jsp" name="searchForm" path="/search"
+
+			scope="session"  type="com.infy.action.SearchAction">
+
+		</action>
+
+		<action input="/editDefect.jsp" name="editDefectForm" path="/editDefect"
+
+			scope="session" parameter="method" type="com.infy.action.EditDefectAction">
+
+			<forward name="success" path="/editDefect.jsp" />
+			<forward name="failure" path="/failure.jsp" />
+
+		</action>
+
+		<action input="/viewDefectReport.jsp" name="viewReportForm"
+			path="/viewReport" scope="session" parameter="method"
+			type="com.infy.action.ViewReportAction">
+			<forward name="failure" path="/failure.jsp" />
+		</action>
+
+
+	</action-mappings>
+
+	<!-- Message Resources Configuration -->
+	<message-resources parameter="com.infy.resource.ApplicationResources" />
+
+	<!-- Validator Configuration -->
+	<plug-in className="org.apache.struts.validator.ValidatorPlugIn">
+		<set-property property="pathnames"
+			value="/WEB-INF/validator-rules.xml,
+                       /WEB-INF/validation.xml" />
+	</plug-in>
+
+	<!-- Tiles Configuration -->
+	<plug-in className="org.apache.struts.tiles.TilesPlugin">
+		<set-property property="definitions-config" value="/WEB-INF/tiles-defs.xml" />
+		<set-property property="moduleAware" value="true" />
+	</plug-in>
+
+</struts-config>
